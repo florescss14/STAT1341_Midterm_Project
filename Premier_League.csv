@@ -1,4 +1,4 @@
-Season,Club,MP,W,D,L,GF,GA,GD,Pts,Total_Comp,Total_Att, Short_Cmp_Pct,TotDist,PrgDist,Short_Cmp,Short_Att,Short_Cmp_Pct,Medium Cmp,Medium_Att,Medium_Cmp_Pct,Long_Cmp,Long_Att,Long_Cmp_Pct,KP,Ent_Final_Third,Ent_Opposing_PA,Cross_into_PA,Prog_10_plus_yards
+Season,Club,MP,W,D,L,GF,GA,GD,Pts,Total_Comp,Total_Att, Total_Cmp_Pct,TotDist,PrgDist,Short_Cmp,Short_Att,Short_Cmp_Pct,Medium Cmp,Medium_Att,Medium_Cmp_Pct,Long_Cmp,Long_Att,Long_Cmp_Pct,KP,Ent_Final_Third,Ent_Opposing_PA,Cross_into_PA,Prog_10_plus_yards
 2017/18,Arsenal,38,19,6,13,74,51,23,63,20840,24882,83.8,395177,124259,8619,9665,89.2,9006,10136,88.9,2778,4170,66.6,433,1629,506,62,1887
 2017/18,Bournemouth,38,11,11,16,45,61,-16,44,13512,17678,76.4,263584,93887,5591,6479,86.3,5709,6862,83.2,1973,3640,54.2,350,965,302,75,1232
 2017/18,Brighton,38,9,13,16,34,54,-20,40,11951,16139,74.1,254240,92935,4546,5388,84.4,4821,5896,81.8,2344,4203,55.8,278,852,196,69,984
