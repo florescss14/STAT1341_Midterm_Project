@@ -1,0 +1,310 @@
+---
+title: "Midterm Project"
+author: 'Christopher Flores and Zack Chipperfield'
+output:
+  word_document: default
+---
+
+```{r}
+library(tidyverse)
+```
+
+
+```{r, read_data}
+data_url <- 'https://raw.githubusercontent.com/florescss14/STAT1341_Midterm_Project/main/Bundesliga.csv'
+bund <- readr::read_csv(data_url, col_names = TRUE)
+
+data_url <- 'https://raw.githubusercontent.com/florescss14/STAT1341_Midterm_Project/main/La_Liga.csv'
+liga <- readr::read_csv(data_url, col_names = TRUE)
+
+data_url <- 'https://raw.githubusercontent.com/florescss14/STAT1341_Midterm_Project/main/Ligue_1.csv'
+ligue <- readr::read_csv(data_url, col_names = TRUE)
+
+data_url <- 'https://raw.githubusercontent.com/florescss14/STAT1341_Midterm_Project/main/Premier_League.csv'
+epl <- readr::read_csv(data_url, col_names = TRUE)
+
+data_url <- 'https://raw.githubusercontent.com/florescss14/STAT1341_Midterm_Project/main/Serie_A.csv'
+serie <- readr::read_csv(data_url, col_names = TRUE)
+
+```
+As some leagues have a different number of matches played we want to normalize it to number of points scored per match in each league.
+```{r}
+bund$Pts.MP <- bund$Pts / bund$MP
+liga$Pts.MP <- liga$Pts / liga$MP
+ligue$Pts.MP <- ligue$Pts / ligue$MP
+epl$Pts.MP <- epl$Pts / epl$MP
+serie$Pts.MP <- serie$Pts / serie$MP
+
+
+all <- rbind(bund, liga, ligue, epl, serie)
+```
+
+
+```{r}
+ggplot() +
+geom_histogram(mapping = aes(x = bund$Total_Cmp_Pct), bins = 8) 
+
+ggplot() +
+geom_histogram(mapping = aes(x = liga$Total_Cmp_Pct), bins = 8) 
+
+ggplot() +
+  geom_histogram(mapping = aes(x = ligue$Total_Cmp_Pct), bins = 8)
+ggplot() +
+  geom_histogram(mapping = aes(x = epl$Total_Cmp_Pct), bins = 8)
+ggplot() +
+  geom_histogram(mapping = aes(x = serie$Total_Cmp_Pct), bins = 8)
+```
+
+```{r}
+summary(bund$Total_Cmp_Pct)
+summary(liga$Total_Cmp_Pct)
+summary(ligue$Total_Cmp_Pct)
+summary(epl$Total_Cmp_Pct) 
+summary(serie$Total_Cmp_Pct)
+```
+```{r}
+sd(bund$Total_Cmp_Pct)
+sd(liga$Total_Cmp_Pct)
+sd(ligue$Total_Cmp_Pct)
+sd(epl$Total_Cmp_Pct) 
+sd(serie$Total_Cmp_Pct)
+```
+
+```{r}
+plot(bund$Total_Cmp_Pct, bund$Pts.MP)
+plot(liga$Total_Cmp_Pct, liga$Pts.MP)
+plot(ligue$Total_Cmp_Pct, ligue$Pts.MP)
+plot(epl$Total_Cmp_Pct, epl$Pts.MP)
+plot(serie$Total_Cmp_Pct, serie$Pts.MP)
+```
+Let's look at the correlation between Passing completion and points for each league.
+
+```{r}
+cor(bund$Total_Cmp_Pct, bund$Pts.MP)
+cor(liga$Total_Cmp_Pct, liga$Pts.MP)
+cor(ligue$Total_Cmp_Pct, ligue$Pts.MP)
+cor(epl$Total_Cmp_Pct, epl$Pts.MP)
+cor(serie$Total_Cmp_Pct, serie$Pts.MP)
+```
+```{r}
+summary(bund$Total_Cmp_Pct)
+summary(liga$Total_Cmp_Pct)
+summary(ligue$Total_Cmp_Pct)
+summary(epl$Total_Cmp_Pct)
+summary(serie$Total_Cmp_Pct)
+```
+
+```{r}
+plot(bund$PrgDist, bund$Pts.MP)
+plot(liga$PrgDist, liga$Pts.MP)
+plot(ligue$PrgDist, ligue$Pts.MP)
+plot(epl$PrgDist, epl$Pts.MP)
+plot(serie$PrgDist, serie$Pts.MP)
+```
+
+```{r}
+cor(bund$PrgDist, bund$Pts.MP)
+cor(liga$PrgDist, liga$Pts.MP)
+cor(ligue$PrgDist, ligue$Pts.MP)
+cor(epl$PrgDist, epl$Pts.MP)
+cor(serie$PrgDist, serie$Pts.MP)
+```
+```{r}
+plot(bund$Prog_10_plus_yards, bund$Pts.MP)
+plot(liga$Prog_10_plus_yards, liga$Pts.MP)
+plot(ligue$Prog_10_plus_yards, ligue$Pts.MP)
+plot(epl$Prog_10_plus_yards, epl$Pts.MP)
+plot(serie$Prog_10_plus_yards, serie$Pts.MP)
+```
+
+```{r}
+cor(bund$Prog_10_plus_yards, bund$Pts.MP)
+cor(liga$Prog_10_plus_yards, liga$Pts.MP)
+cor(ligue$Prog_10_plus_yards, ligue$Pts.MP)
+cor(epl$Prog_10_plus_yards, epl$Pts.MP)
+cor(serie$Prog_10_plus_yards, serie$Pts.MP)
+```
+
+```{r}
+plot(bund$Short_Cmp_Pct, bund$Pts.MP)
+plot(liga$Short_Cmp_Pct, liga$Pts.MP)
+plot(ligue$Short_Cmp_Pct, ligue$Pts.MP)
+plot(epl$Short_Cmp_Pct, epl$Pts.MP)
+plot(serie$Short_Cmp_Pct, serie$Pts.MP)
+```
+```{r}
+cor(bund$Short_Cmp_Pct, bund$Pts.MP)
+cor(liga$Short_Cmp_Pct, liga$Pts.MP)
+cor(ligue$Short_Cmp_Pct, ligue$Pts.MP)
+cor(epl$Short_Cmp_Pct, epl$Pts.MP)
+cor(serie$Short_Cmp_Pct, serie$Pts.MP)
+```
+```{r}
+plot(bund$Medium_Cmp_Pct, bund$Pts.MP)
+plot(liga$Medium_Cmp_Pct, liga$Pts.MP)
+plot(ligue$Medium_Cmp_Pct, ligue$Pts.MP)
+plot(epl$Medium_Cmp_Pct, epl$Pts.MP)
+plot(serie$Medium_Cmp_Pct, serie$Pts.MP)
+```
+```{r}
+cor(bund$Medium_Cmp_Pct, bund$Pts.MP)
+cor(liga$Medium_Cmp_Pct, liga$Pts.MP)
+cor(ligue$Medium_Cmp_Pct, ligue$Pts.MP)
+cor(epl$Medium_Cmp_Pct, epl$Pts.MP)
+cor(serie$Medium_Cmp_Pct, serie$Pts.MP)
+```
+```{r}
+plot(bund$Long_Cmp_Pct, bund$Pts.MP)
+plot(liga$Long_Cmp_Pct, liga$Pts.MP)
+plot(ligue$Long_Cmp_Pct, ligue$Pts.MP)
+plot(epl$Long_Cmp_Pct, epl$Pts.MP)
+plot(serie$Long_Cmp_Pct, serie$Pts.MP)
+```
+```{r}
+cor(bund$Long_Cmp_Pct, bund$Pts.MP)
+cor(liga$Long_Cmp_Pct, liga$Pts.MP)
+cor(ligue$Long_Cmp_Pct, ligue$Pts.MP)
+cor(epl$Long_Cmp_Pct, epl$Pts.MP)
+cor(serie$Long_Cmp_Pct, serie$Pts.MP)
+```
+
+```{r}
+plot(bund$TotDist, bund$Pts.MP)
+plot(liga$TotDist, liga$Pts.MP)
+plot(ligue$TotDist, ligue$Pts.MP)
+plot(epl$TotDist, epl$Pts.MP)
+plot(serie$TotDist, serie$Pts.MP)
+```
+
+```{r}
+cor(bund$TotDist, bund$Pts.MP)
+cor(liga$TotDist, liga$Pts.MP)
+cor(ligue$TotDist, ligue$Pts.MP)
+cor(epl$TotDist, epl$Pts.MP)
+cor(serie$TotDist, serie$Pts.MP)
+```
+```{r}
+multi_model <- lm( Pts.MP ~ Total_Cmp_Pct  + Ent_Final_Third + Ent_Opposing_PA + Cross_into_PA + PrgDist + Short_Cmp_Pct + Medium_Cmp_Pct + Long_Cmp_Pct + Prog_10_plus_yards + KP, data = all)
+summary(multi_model)
+```
+```{r}
+intercept_only <- lm(Pts.MP ~ 1, data=all)
+all_predictors <- lm(Pts.MP ~ Total_Cmp_Pct  + Ent_Final_Third + Ent_Opposing_PA + Cross_into_PA + PrgDist + Short_Cmp_Pct + Medium_Cmp_Pct + Long_Cmp_Pct + Prog_10_plus_yards + KP, data = all)
+step_model <- step(intercept_only, direction = "both", scope=formula(all_predictors), trace=0)
+summary(step_model)
+
+```
+
+```{r}
+all$pred_Pts.MP <- predict(step_model, all)
+all$error <- all$Pts.MP - all$pred_Pts.MP
+```
+
+```{r}
+intercept_only <- lm(Pts.MP ~ 1, data=bund)
+all_predictors <- lm(Pts.MP ~ Total_Cmp_Pct  + Ent_Final_Third + Ent_Opposing_PA + Cross_into_PA + PrgDist + Short_Cmp_Pct + Medium_Cmp_Pct + Long_Cmp_Pct + Prog_10_plus_yards + KP, data = bund)
+bund_step_model <- step(intercept_only, direction = "both", scope=formula(all_predictors), trace=0)
+summary(bund_step_model)
+
+bund$pred_Pts.MP <- predict(bund_step_model, bund)
+bund$error <- bund$Pts.MP - bund$pred_Pts.MP
+```
+
+```{r}
+intercept_only <- lm(Pts.MP ~ 1, data=liga)
+all_predictors <- lm(Pts.MP ~ Total_Cmp_Pct  + Ent_Final_Third + Ent_Opposing_PA + Cross_into_PA + PrgDist + Short_Cmp_Pct + Medium_Cmp_Pct + Long_Cmp_Pct + Prog_10_plus_yards + KP, data = liga)
+liga_step_model <- step(intercept_only, direction = "both", scope=formula(all_predictors), trace=0)
+summary(liga_step_model)
+
+liga$pred_Pts.MP <- predict(liga_step_model, liga)
+liga$error <- liga$Pts.MP - liga$pred_Pts.MP
+```
+
+```{r}
+intercept_only <- lm(Pts.MP ~ 1, data=ligue)
+all_predictors <- lm(Pts.MP ~ Total_Cmp_Pct  + Ent_Final_Third + Ent_Opposing_PA + Cross_into_PA + PrgDist + Short_Cmp_Pct + Medium_Cmp_Pct + Long_Cmp_Pct + Prog_10_plus_yards + KP, data = ligue)
+ligue_step_model <- step(intercept_only, direction = "both", scope=formula(all_predictors), trace=0)
+summary(ligue_step_model)
+
+ligue$pred_Pts.MP <- predict(ligue_step_model, ligue)
+ligue$error <- ligue$Pts.MP - ligue$pred_Pts.MP
+```
+
+```{r}
+intercept_only <- lm(Pts.MP ~ 1, data=epl)
+all_predictors <- lm(Pts.MP ~ Total_Cmp_Pct  + Ent_Final_Third + Ent_Opposing_PA + Cross_into_PA + PrgDist + Short_Cmp_Pct + Medium_Cmp_Pct + Long_Cmp_Pct + Prog_10_plus_yards + KP, data = epl)
+epl_step_model <- step(intercept_only, direction = "both", scope=formula(all_predictors), trace=0)
+summary(epl_step_model)
+
+epl$pred_Pts.MP <- predict(epl_step_model, epl)
+epl$error <- epl$Pts.MP - epl$pred_Pts.MP
+```
+
+```{r}
+intercept_only <- lm(Pts.MP ~ 1, data=serie)
+all_predictors <- lm(Pts.MP ~ Total_Cmp_Pct  + Ent_Final_Third + Ent_Opposing_PA + Cross_into_PA + PrgDist + Short_Cmp_Pct + Medium_Cmp_Pct + Long_Cmp_Pct + Prog_10_plus_yards + KP, data = serie)
+serie_step_model <- step(intercept_only, direction = "both", scope=formula(all_predictors), trace=0)
+summary(serie_step_model)
+
+serie$pred_Pts.MP <- predict(serie_step_model, serie)
+serie$error <- serie$Pts.MP - serie$pred_Pts.MP
+```
+```{r}
+plot(bund$KP, bund$Pts.MP)
+plot(liga$KP, liga$Pts.MP)
+plot(ligue$KP, ligue$Pts.MP)
+plot(epl$KP, epl$Pts.MP)
+plot(serie$KP, serie$Pts.MP)
+```
+
+
+```{r}
+cor(bund$KP, bund$Pts.MP)
+cor(liga$KP, liga$Pts.MP)
+cor(ligue$KP, ligue$Pts.MP)
+cor(epl$KP, epl$Pts.MP)
+cor(serie$KP, serie$Pts.MP)
+```
+```{r}
+plot(bund$Ent_Final_Third, bund$Pts.MP)
+plot(liga$Ent_Final_Third, liga$Pts.MP)
+plot(ligue$Ent_Final_Third, ligue$Pts.MP)
+plot(epl$Ent_Final_Third, epl$Pts.MP)
+plot(serie$Ent_Final_Third, serie$Pts.MP)
+```
+
+```{r}
+cor(bund$Ent_Final_Third, bund$Pts.MP)
+cor(liga$Ent_Final_Third, liga$Pts.MP)
+cor(ligue$Ent_Final_Third, ligue$Pts.MP)
+cor(epl$Ent_Final_Third, epl$Pts.MP)
+cor(serie$Ent_Final_Third, serie$Pts.MP)
+```
+
+
+```{r}
+plot(bund$Ent_Opposing_PA, bund$Pts.MP)
+plot(liga$Ent_Opposing_PA, liga$Pts.MP)
+plot(ligue$Ent_Opposing_PA, ligue$Pts.MP)
+plot(epl$Ent_Opposing_PA, epl$Pts.MP)
+plot(serie$Ent_Opposing_PA, serie$Pts.MP)
+```
+
+
+```{r}
+cor(bund$Ent_Opposing_PA, bund$Pts.MP)
+cor(liga$Ent_Opposing_PA, liga$Pts.MP)
+cor(ligue$Ent_Opposing_PA, ligue$Pts.MP)
+cor(epl$Ent_Opposing_PA, epl$Pts.MP)
+cor(serie$Ent_Opposing_PA, serie$Pts.MP)
+```
+
+
+
+
+
+
+
+
+
+
